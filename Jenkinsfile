@@ -32,9 +32,9 @@ ENDSSH
 
     stage('SCP application on /locations') {
       steps {
-        sh 'scp index.js centos@192.168.231.144:/home/centos/deploy1'
-        sh 'scp index2.js centos@192.168.231.144:/home/centos/deploy2'
-        sh 'scp index3.js centos@192.168.231.144:/home/centos/deploy3'
+        sh 'scp index.js centos@192.168.231.144:/home/centos/aplha/deploy1'
+        sh 'scp index2.js centos@192.168.231.144:/home/centos/aplha/deploy2'
+        sh 'scp index3.js centos@192.168.231.144:/home/centos/aplha/deploy3'
         sh 'echo "All deployment folder are READY."'
       }
     }   
@@ -70,8 +70,8 @@ ENDSSH'
         sh '''
         set -x
         ssh centos@192.168.231.144 "
-                    cd /home/centos/deploy1
-                    node /home/centos/deploy/index.js > /dev/null 2>&1 <&- & "
+                    cd /home/centos/aplha/deploy1
+                    node index.js > /dev/null 2>&1 <&- & "
         sudo sleep 3                    
         X=$(curl -k  -o /dev/null -s -w %{http_code} http://192.168.231.144:3000)
         if [ $X -eq 200 ];
@@ -88,7 +88,7 @@ ENDSSH'
         sh '''
         set -x
         ssh centos@192.168.231.144 "
-                    cd /home/centos/deploy2
+                    cd /home/centos/alpha/deploy2
                     node index2.js > /dev/null 2>&1 <&- & "
         sudo sleep 3                    
         X=$(curl -k  -o /dev/null -s -w %{http_code} http://192.168.231.144:3002)
@@ -106,7 +106,7 @@ ENDSSH'
         sh '''
         set -x
         ssh centos@192.168.231.144 "
-                    cd /home/centos/deploy3
+                    cd /home/centos/alpha/deploy3
                     node index3.js > /dev/null 2>&1 <&- & "
         sudo sleep 5                    
         X=$(curl -k  -o /dev/null -s -w %{http_code} http://192.168.231.144:3003)
