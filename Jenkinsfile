@@ -12,8 +12,8 @@ pipeline {
           sudo rm -rf /home/centos/aplha*
           sudo sleep 2
           cd /home/centos
-          sudo mkdir aplha
-          cd aplha
+          sudo mkdir cd /home/centos/aplha/
+          cd /home/centos/aplha
           sudo mkdir /deploy1 /deploy2 /deploy3
           sudo chmod +x /deploy*
           sudo dnf install npm -y
