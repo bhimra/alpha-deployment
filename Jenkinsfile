@@ -12,10 +12,10 @@ pipeline {
           sudo rm -rf /home/centos/aplha*
           sudo sleep 2
           cd /home/centos
-          sudo mkdir cd /home/centos/aplha/
+          mkdir cd /home/centos/aplha/
           sudo chmod +x /alpha
           cd /home/centos/aplha
-          sudo mkdir /deploy1 /deploy2 /deploy3
+          mkdir /deploy1 /deploy2 /deploy3
           sudo dnf install npm -y
           sudo npm install
 ENDSSH
