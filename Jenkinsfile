@@ -26,7 +26,7 @@ ENDSSH
     stage('checkout SCM') {
       steps {
         git 'https://github.com/bhimra/alpha-deployment.git'
-        sh 'pwd && sudo chmod +x .'
+        sh 'pwd && sudo chmod -R 775 .'
       }
     }
 
