@@ -12,7 +12,7 @@ pipeline {
           sudo rm -rf /home/centos/aplha*
           sudo sleep 2
           cd /home/centos
-          mkdir cd /home/centos/aplha/
+          mkdir cd /home/centos/aplha
           sudo chmod +x /alpha
           cd /home/centos/aplha
           mkdir /deploy1 /deploy2 /deploy3
