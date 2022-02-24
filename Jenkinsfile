@@ -9,13 +9,13 @@ pipeline {
       steps {
         sh '''
           ssh -T centos@192.168.231.144 << ENDSSH
-          sudo rm -rf /home/centos/aplha*
-          sudo sleep 2
           cd /home/centos
-          mkdir cd /home/centos/aplha
-          sudo chmod +x /alpha
-          cd /home/centos/aplha
-          mkdir /deploy1 /deploy2 /deploy3
+          sudo rm -rf alpha/
+          sudo sleep 2
+          mkdir alpha
+          sudo chmod +x alpha/
+          cd alpha/
+          mkdir deploy1 deploy2 deploy3
           sudo dnf install npm -y
           sudo npm install
 ENDSSH
@@ -26,15 +26,15 @@ ENDSSH
     stage('checkout SCM') {
       steps {
         git 'https://github.com/bhimra/alpha-deployment.git'
-        sh 'pwd && sudo chmod -R 775 .'
+        sh 'pwd && sudo chmod +x .'
       }
     }
 
     stage('SCP application on /locations') {
       steps {
-        sh 'scp index.js centos@192.168.231.144:/home/centos/aplha/deploy1'
-        sh 'scp index2.js centos@192.168.231.144:/home/centos/aplha/deploy2'
-        sh 'scp index3.js centos@192.168.231.144:/home/centos/aplha/deploy3'
+        sh 'scp index.js centos@192.168.231.144:/home/centos/alpha/deploy1'
+        sh 'scp index2.js centos@192.168.231.144:/home/centos/alpha/deploy2'
+        sh 'scp index3.js centos@192.168.231.144:/home/centos/alpha/deploy3'
         sh 'echo "All deployment folder are READY."'
       }
     }   
@@ -70,7 +70,7 @@ ENDSSH'
         sh '''
         set -x
         ssh centos@192.168.231.144 "
-                    cd /home/centos/aplha/deploy1
+                    cd /home/centos/alpha/deploy1
                     node index.js > /dev/null 2>&1 <&- & "
         sudo sleep 3                    
         X=$(curl -k  -o /dev/null -s -w %{http_code} http://192.168.231.144:3000)
