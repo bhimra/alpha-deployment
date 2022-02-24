@@ -153,5 +153,4 @@ ENDSSH'
               echo "Pipeline currentResult: ${currentBuild.currentResult}"
           }
       }
-  }  
-}
+  }
