@@ -79,7 +79,6 @@ ENDSSH'
                 echo -e 'web site on port 3000 is down' 
         fi '''
        }
-     }
       post {
         unstable {
           echo 'The state is Unstable..........'
@@ -104,6 +103,7 @@ ENDSSH
       '''
         }
       }
+    }
     stage ('Stage - 2: Build & Deploy index2.js service') {
       steps {
         sh '''
