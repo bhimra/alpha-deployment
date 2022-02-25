@@ -112,7 +112,7 @@ ENDSSH
         set -x
         ssh centos@192.168.231.144 "
                     cd /home/centos/alpha/deploy2
-                    node index.js > /dev/null 2>&1 <&- & "
+                    node index2.js > /dev/null 2>&1 <&- & "
         sudo sleep 3                    
         X=$(curl -k  -o /dev/null -s -w %{http_code} http://192.168.231.144:3002)
         if [ $X -eq 200 ];
@@ -163,7 +163,7 @@ ENDSSH
         set -x
         ssh centos@192.168.231.144 "
                     cd /home/centos/alpha/deploy3
-                    node index3.js > /dev/null 2>&1 <&- & "
+                    node index.js > /dev/null 2>&1 <&- & "
         sudo sleep 5                    
         X=$(curl -k  -o /dev/null -s -w %{http_code} http://192.168.231.144:3003)
         if [ $X -eq 200 ];
