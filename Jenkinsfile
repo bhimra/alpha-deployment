@@ -43,6 +43,7 @@ ENDSSH
         Name2='$(ls -v /Path | grep [i]ndex2.js | tail -1)'
         Name3='$(ls -v /Path | grep [i]ndex3.js | tail -1)'
       }
+
       steps { 
           sh '''
               ssh centos@192.168.231.144 "
