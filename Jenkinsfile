@@ -88,6 +88,7 @@ ENDSSH'
             echo -e 'index.js service stop & port 3000 is down'
             sudo rm -rf /home/centos/alpha/deploy1/* 
             echo -e 'removed index.js from deploy1'
+            exit 1;
 ENDSSH 
       '''
         }
@@ -99,6 +100,7 @@ ENDSSH
             echo -e 'index.js service stop & port 3000 is down'
             sudo rm -rf /home/centos/alpha/deploy1/* 
             echo -e 'removed index.js from deploy1'
+            exit;
 ENDSSH 
       '''
         }
@@ -133,6 +135,7 @@ ENDSSH
             echo -e 'index.js service stop & port 3002 is down.........................'
             sudo rm -rf /home/centos/alpha/deploy2/* 
             echo -e 'removed index2.js from deploy2...........................................'
+            exit 1;
 ENDSSH 
       '''
         }
@@ -147,6 +150,7 @@ ENDSSH
             echo -e 'removed index.js from deploy1...........................................'
             sudo rm -rf /home/centos/alpha/deploy2/* 
             echo -e 'removed index.js from deploy2...........................................'
+            exit;
 ENDSSH 
       '''
         }
@@ -183,6 +187,7 @@ ENDSSH
             echo -e 'index.js service stop & port 3002 is down...............................'
             sudo rm -rf /home/centos/alpha/deploy2/* 
             echo -e 'removed index.js from deploy2...........................................'
+            exit 1;
 ENDSSH 
       '''
         }
@@ -199,6 +204,9 @@ ENDSSH
             echo -e 'index.js service stop & port 3002 is down...............................'
             sudo rm -rf /home/centos/alpha/deploy2/* 
             echo -e 'removed index.js from deploy2...........................................'
+            sudo rm -rf /home/centos/alpha/deploy3/* 
+            echo -e 'removed index.js from deploy3...........................................'
+            exit;
 ENDSSH 
       '''
          }
