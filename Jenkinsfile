@@ -32,16 +32,16 @@ ENDSSH
 
     stage('Backing Up the remote server') { 
       environment {
-        dir='/home/centos/alpha'
-        Path1='/home/centos/alpha/deploy1'
-        Path2='/home/centos/alpha/deploy2'
-        Path3='/home/centos/alpha/deploy3'  
-        Backup1='/home/centos/alpha/backup1'
-        Backup2='/home/centos/alpha/backup2'
-        Backup3='/home/centos/alpha/backup3'
-        Name1='$(ls -v /Path | grep [i]ndex.js | tail -1)'
-        Name2='$(ls -v /Path | grep [i]ndex2.js | tail -1)'
-        Name3='$(ls -v /Path | grep [i]ndex3.js | tail -1)'
+        dir= '/home/centos/alpha'
+        Path1= '/home/centos/alpha/deploy1'
+        Path2= '/home/centos/alpha/deploy2'
+        Path3= '/home/centos/alpha/deploy3'  
+        Backup1= '/home/centos/alpha/backup1'
+        Backup2= '/home/centos/alpha/backup2'
+        Backup3= '/home/centos/alpha/backup3'
+        Name1= '$(ls -v /Path | grep [i]ndex.js | tail -1)'
+        Name2= '$(ls -v /Path | grep [i]ndex2.js | tail -1)'
+        Name3= '$(ls -v /Path | grep [i]ndex3.js | tail -1)'
       }
 
       steps { 
@@ -50,26 +50,31 @@ ENDSSH
               cd $dir
               mkdir backup1 backup2 backup3
               if [ -f "${env.Path1}"/"${env.Name1}"]; then
-                echo -e '${env.Name1} file exist'
+                echo -e '${env.Name1} file exist.'
                 mv ${env.Path1}/${env.Name1} ${env.Backup1}
               else
                 echo -e "file doesn't exist"
               fi
+
               echo -e 'backup done for ${env.Name1} file.'
+              
               if [ -f "${env.Path2}/${env.Name2}" ]; then
-                echo -e '${env.Name2} file exist'
+                echo -e '${env.Name2} file exist.'
                 mv ${env.Path2}/${env.Name2} ${env.Backup2}
               else
                 echo -e "file doesn't exist"
               fi
+              
               echo -e 'backup done for ${env.Name2} file.'
+              
               if [ -f "${env.Path3}/${env.Name3}" ]; then
                 echo -e '${env.Name3} file exist'
                 mv ${env.Path3}/${env.Name3} ${env.Backup3}
               else
                 echo -e "file doesn't exist"
               fi
-              echo -e 'backup done for ${env.Name3} file.'"
+              
+              echo -e 'backup done for ${env.Name3} file.' "
      '''
       }
     }
