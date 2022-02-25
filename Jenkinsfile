@@ -164,7 +164,7 @@ ENDSSH
         sh '''
         set -x
         ssh centos@192.168.231.144 "
-                    cd /home/centos/alpha/deploy3
+                    cd /home/centos/alpha/deploy2
                     node index3.js > /dev/null 2>&1 <&- &
                     mkdir /home/centos/alpha/backup3
                     cp index3.js /home/centos/alpha/backup3/  "
