@@ -128,7 +128,7 @@ ENDSSH
           echo 'Rollback back to Original......'
           sh '''
             ssh -T centos@192.168.231.144 << ENDSSH
-            netstat -anp 2> /dev/null | grep :3000 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
+            sudo netstat -anp 2> /dev/null | grep :3000 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
             echo -e 'index.js service stop & port 3000 is down...............................'
             sudo rm -rf /home/centos/alpha/deploy1/* 
             echo -e 'removed index.js from deploy1...........................................'
@@ -144,7 +144,7 @@ ENDSSH
           echo 'Rollback back to Original......'
           sh '''
             ssh -T centos@192.168.231.144 << ENDSSH
-            netstat -anp 2> /dev/null | grep :3000 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
+            sudo netstat -anp 2> /dev/null | grep :3000 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
             echo -e 'index.js service stop & port 3000 is down...............................'
             sudo rm -rf /home/centos/alpha/deploy1/* 
             echo -e 'removed index.js from deploy1...........................................'
@@ -179,11 +179,11 @@ ENDSSH
           echo 'Rollback back to Original......'
           sh '''
             ssh -T centos@192.168.231.144 << ENDSSH
-            netstat -anp 2> /dev/null | grep :3000 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
+            sudo netstat -anp 2> /dev/null | grep :3000 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
             echo -e 'index.js service stop & port 3000 is down...............................'
             sudo rm -rf /home/centos/alpha/deploy1/* 
             echo -e 'removed index.js from deploy1...........................................'
-            netstat -anp 2> /dev/null | grep :3002 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
+            sudo netstat -anp 2> /dev/null | grep :3002 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
             echo -e 'index.js service stop & port 3002 is down...............................'
             sudo rm -rf /home/centos/alpha/deploy2/* 
             echo -e 'removed index.js from deploy2...........................................'
@@ -196,11 +196,11 @@ ENDSSH
           echo 'Rollback back to Original......'
           sh '''
             ssh -T centos@192.168.231.144 << ENDSSH
-            netstat -anp 2> /dev/null | grep :3000 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
+            sudo netstat -anp 2> /dev/null | grep :3000 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
             echo -e 'index.js service stop & port 3000 is down...............................'
             sudo rm -rf /home/centos/alpha/deploy1/* 
             echo -e 'removed index.js from deploy1...........................................'
-            netstat -anp 2> /dev/null | grep :3002 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
+            sudo netstat -anp 2> /dev/null | grep :3002 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
             echo -e 'index.js service stop & port 3002 is down...............................'
             sudo rm -rf /home/centos/alpha/deploy2/* 
             echo -e 'removed index.js from deploy2...........................................'
