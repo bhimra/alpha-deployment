@@ -68,7 +68,8 @@ ENDSSH
               else
                 echo -e "file doesn't exist"
               fi
-              echo -e 'backup done for ${env.Name3} file.'  
+              echo -e 'backup done for ${env.Name3} file.'"
+     '''
       }
     }
 
@@ -95,9 +96,10 @@ ENDSSH
               echo "node service failed"
           fi
 ENDSSH'
-       '''
+      '''
       }
     }
+
     stage ('Stage - 1: Build & Deploy index.js service') {
       steps {
         sh '''
