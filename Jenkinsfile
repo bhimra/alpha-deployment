@@ -85,6 +85,10 @@ ENDSSH'
             echo -e 'removed index.js from deploy1'
             mv /home/centos/alpha/backup1/index.js /home/centos/alpha/deploy1/
             sudo rm -rf /home/centos/alpha/backup1
+            cd /home/centos/alpha/deploy1
+            node index.js > /dev/null 2>&1 <&- &
+            echo -e 'stage 1 : rollback complete...................................................................'
+
             exit 1;
 ENDSSH 
       '''
@@ -98,7 +102,10 @@ ENDSSH
             sudo rm -rf /home/centos/alpha/deploy1/* 
             echo -e 'removed index.js from deploy1'
             mv /home/centos/alpha/backup1/index.js /home/centos/alpha/deploy1/
-            sudo rm -rf /home/centos/alpha/backup1
+            sudo rm -rf /home/centos/alpha/backup1\
+            cd /home/centos/alpha/deploy1
+            node index.js > /dev/null 2>&1 <&- &
+            echo -e 'stage 1 : rollback complete...................................................................'
             exit;
 ENDSSH 
       '''
@@ -130,12 +137,14 @@ ENDSSH
           sh '''
             ssh -T centos@192.168.231.144 << ENDSSH
             sudo kill -9 $(lsof -i:3000)
-            sudo rm -rf /home/centos/alpha/deploy1/*
             mv /home/centos/alpha/backup1/index.js /home/centos/alpha/deploy1/
             sudo rm -rf /home/centos/alpha/backup1/*
-            sudo rm -rf /home/centos/alpha/deploy2/*
+            sudo kill -9 $(lsof -i:3002)
             mv /home/centos/alpha/backup2/index2.js /home/centos/alpha/deploy2/
-            sudo rm -rf /home/centos/alpha/backup2/*
+            sudo rm -rf /home/centos/alpha/backup2/*   
+            cd /home/centos/alpha/deploy2
+            node index2.js > /dev/null 2>&1 <&- &
+            echo -e 'stage 2 : rollback complete...................................................................'
             exit 1;
 ENDSSH 
       '''
@@ -146,12 +155,14 @@ ENDSSH
           sh '''
             ssh -T centos@192.168.231.144 << ENDSSH
             sudo kill -9 $(lsof -i:3000)
-            sudo rm -rf /home/centos/alpha/deploy1/*
             mv /home/centos/alpha/backup1/index.js /home/centos/alpha/deploy1/
             sudo rm -rf /home/centos/alpha/backup1/*
-            sudo rm -rf /home/centos/alpha/deploy2/*
+            sudo kill -9 $(lsof -i:3002)
             mv /home/centos/alpha/backup2/index2.js /home/centos/alpha/deploy2/
-            sudo rm -rf /home/centos/alpha/backup2/*
+            sudo rm -rf /home/centos/alpha/backup2/*   
+            cd /home/centos/alpha/deploy2
+            node index2.js > /dev/null 2>&1 <&- &
+            echo -e 'stage 2 : rollback complete...................................................................'
             exit;
 ENDSSH 
       '''
@@ -184,16 +195,16 @@ ENDSSH
           sh '''
             ssh -T centos@192.168.231.144 << ENDSSH
             sudo kill -9 $(lsof -i:3000)
-            sudo rm -rf /home/centos/alpha/deploy1/*
             mv /home/centos/alpha/backup1/index.js /home/centos/alpha/deploy1/
             sudo rm -rf /home/centos/alpha/backup1/*
             sudo kill -9 $(lsof -i:3002)
-            sudo rm -rf /home/centos/alpha/deploy2/*
             mv /home/centos/alpha/backup2/index2.js /home/centos/alpha/deploy2/
             sudo rm -rf /home/centos/alpha/backup2/*            
-            sudo rm -rf /home/centos/alpha/deploy3/*
-            mv /home/centos/alpha/backup3/index3.js /home/centos/alpha/deploy2/
-            sudo rm -rf /home/centos/alpha/backup3/*            
+            mv /home/centos/alpha/backup3/index3.js /home/centos/alpha/deploy3/
+            sudo rm -rf /home/centos/alpha/backup3/*
+            cd /home/centos/alpha/deploy3
+            node index3.js > /dev/null 2>&1 <&- &
+            echo -e 'stage 3 : rollback complete...................................................................'
             exit 1;
 ENDSSH 
       '''
@@ -204,16 +215,16 @@ ENDSSH
           sh '''
             ssh -T centos@192.168.231.144 << ENDSSH
             sudo kill -9 $(lsof -i:3000)
-            sudo rm -rf /home/centos/alpha/deploy1/*
             mv /home/centos/alpha/backup1/index.js /home/centos/alpha/deploy1/
             sudo rm -rf /home/centos/alpha/backup1/*
             sudo kill -9 $(lsof -i:3002)
-            sudo rm -rf /home/centos/alpha/deploy2/*
             mv /home/centos/alpha/backup2/index2.js /home/centos/alpha/deploy2/
             sudo rm -rf /home/centos/alpha/backup2/*            
-            sudo rm -rf /home/centos/alpha/deploy3/*
-            mv /home/centos/alpha/backup3/index3.js /home/centos/alpha/deploy2/
-            sudo rm -rf /home/centos/alpha/backup3/*            
+            mv /home/centos/alpha/backup3/index3.js /home/centos/alpha/deploy3/
+            sudo rm -rf /home/centos/alpha/backup3/*
+            cd /home/centos/alpha/deploy3
+            node index3.js > /dev/null 2>&1 <&- &   
+            echo -e 'stage 3 : rollback complete...................................................................' 
             exit;
 ENDSSH 
       '''
