@@ -40,13 +40,13 @@ ENDSSH
     }   
 
 
-    stage('ArchiveArtifacts'){
-            steps{
-                archiveArtifacts artifacts: '**', followSymlinks: false
-            }
-        }
+    // stage('ArchiveArtifacts'){
+    //         steps{
+    //             archiveArtifacts artifacts: '**', followSymlinks: false
+    //         }
+    //     }
     
-    stage ('Verify node service') {
+    stage ('Kill existing node service') {
       steps {
         sh '''
           ssh -t -t  centos@192.168.231.144 'bash -s << 'ENDSSH'
@@ -63,9 +63,7 @@ ENDSSH'
        '''
        }
     }
-
-
-    stage ('Start the index.js node service') {
+    stage ('Stage - 1: Build & Deploy index.js service') {
       steps {
         sh '''
         set -x
@@ -82,8 +80,31 @@ ENDSSH'
         fi '''
        }
      }
-
-    stage ('Start the index2.js node service') {
+      post {
+        unstable {
+          echo 'The state is Unstable..........'
+          echo 'Rollback back to Original......'
+          sh '''
+            ssh -T centos@192.168.231.144 << ENDSSH
+            echo -e 'index.js service stop & port 3000 is down'
+            sudo rm -rf /home/centos/alpha/deploy1/* 
+            echo -e 'removed index.js from deploy1'
+ENDSSH 
+      '''
+        }
+        failure {
+          echo 'The state is Failure..........'
+          echo 'Rollback back to Original......'
+          sh '''
+            ssh -T centos@192.168.231.144 << ENDSSH
+            echo -e 'index.js service stop & port 3000 is down'
+            sudo rm -rf /home/centos/alpha/deploy1/* 
+            echo -e 'removed index.js from deploy1'
+ENDSSH 
+      '''
+        }
+      }
+    stage ('Stage - 2: Build & Deploy index2.js service') {
       steps {
         sh '''
         set -x
@@ -99,9 +120,39 @@ ENDSSH'
                 echo -e 'web site on port 3002 is down' 
         fi '''
        }
-     }
-
-    stage ('Start the index3.js node service') {
+      post {
+        unstable {
+          echo 'The state is Unstable..........'
+          echo 'Rollback back to Original......'
+          sh '''
+            ssh -T centos@192.168.231.144 << ENDSSH
+            netstat -anp 2> /dev/null | grep :3000 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
+            echo -e 'index.js service stop & port 3000 is down...............................'
+            sudo rm -rf /home/centos/alpha/deploy1/* 
+            echo -e 'removed index.js from deploy1...........................................'
+            echo -e 'index.js service stop & port 3002 is down.........................'
+            sudo rm -rf /home/centos/alpha/deploy2/* 
+            echo -e 'removed index2.js from deploy2...........................................'
+ENDSSH 
+      '''
+        }
+        failure {
+          echo 'The state is Failure..........'
+          echo 'Rollback back to Original......'
+          sh '''
+            ssh -T centos@192.168.231.144 << ENDSSH
+            netstat -anp 2> /dev/null | grep :3000 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
+            echo -e 'index.js service stop & port 3000 is down...............................'
+            sudo rm -rf /home/centos/alpha/deploy1/* 
+            echo -e 'removed index.js from deploy1...........................................'
+            sudo rm -rf /home/centos/alpha/deploy2/* 
+            echo -e 'removed index.js from deploy2...........................................'
+ENDSSH 
+      '''
+        }
+      }
+    
+    stage ('Stage - 3: Build & Deploy index3.js service') {
       steps {
         sh '''
         set -x
@@ -117,6 +168,39 @@ ENDSSH'
                 echo -e 'web site on port 3003 is down' 
         fi '''
        }
-     }
-  }  
+      post {
+        unstable {
+          echo 'The state is Unstable..........'
+          echo 'Rollback back to Original......'
+          sh '''
+            ssh -T centos@192.168.231.144 << ENDSSH
+            netstat -anp 2> /dev/null | grep :3000 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
+            echo -e 'index.js service stop & port 3000 is down...............................'
+            sudo rm -rf /home/centos/alpha/deploy1/* 
+            echo -e 'removed index.js from deploy1...........................................'
+            netstat -anp 2> /dev/null | grep :3002 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
+            echo -e 'index.js service stop & port 3002 is down...............................'
+            sudo rm -rf /home/centos/alpha/deploy2/* 
+            echo -e 'removed index.js from deploy2...........................................'
+ENDSSH 
+      '''
+        }
+        failure {
+          echo 'The state is Failure..........'
+          echo 'Rollback back to Original......'
+          sh '''
+            ssh -T centos@192.168.231.144 << ENDSSH
+            netstat -anp 2> /dev/null | grep :3000 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
+            echo -e 'index.js service stop & port 3000 is down...............................'
+            sudo rm -rf /home/centos/alpha/deploy1/* 
+            echo -e 'removed index.js from deploy1...........................................'
+            netstat -anp 2> /dev/null | grep :3002 | awk '{ print $7 }' | cut -d'/' -f1 | xargs kill
+            echo -e 'index.js service stop & port 3002 is down...............................'
+            sudo rm -rf /home/centos/alpha/deploy2/* 
+            echo -e 'removed index.js from deploy2...........................................'
+ENDSSH 
+      '''
+        }
+      } 
+   }
 }
