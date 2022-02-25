@@ -33,16 +33,16 @@ ENDSSH
     stage('Backing Up the remote server') { 
 
       environment {
-        dir= "/home/centos/alpha"
-        Path1= "/home/centos/alpha/deploy1"
-        Path2= "/home/centos/alpha/deploy2"
-        Path3= "/home/centos/alpha/deploy3"  
-        Backup1= "/home/centos/alpha/backup1"
-        Backup2= "/home/centos/alpha/backup2"
-        Backup3= "/home/centos/alpha/backup3"
-        Name1= "$(ls -v /Path | grep [i]ndex.js | tail -1)"
-        Name2= "$(ls -v /Path | grep [i]ndex2.js | tail -1)"
-        Name3= "$(ls -v /Path | grep [i]ndex3.js | tail -1)"
+        dir=/home/centos/alpha
+        Path1=/home/centos/alpha/deploy1
+        Path2=/home/centos/alpha/deploy2
+        Path3=/home/centos/alpha/deploy3  
+        Backup1= /home/centos/alpha/backup1
+        Backup2=/home/centos/alpha/backup2
+        Backup3=/home/centos/alpha/backup3
+        Name1=$(ls -v /Path | grep [i]ndex.js | tail -1)
+        Name2=$(ls -v /Path | grep [i]ndex2.js | tail -1)
+        Name3=$(ls -v /Path | grep [i]ndex3.js | tail -1)
       }
 
       steps { 
