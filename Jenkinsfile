@@ -164,8 +164,8 @@ ENDSSH
         sh '''
         set -x
         ssh centos@192.168.231.144 "
-                    cd /home/centos/alpha/deploy2
-                    node index3.js > /dev/null 2>&1 <&- &
+                    cd /home/centos/alpha/deploy3
+                    node index.js > /dev/null 2>&1 <&- &
                     mkdir /home/centos/alpha/backup3
                     cp index3.js /home/centos/alpha/backup3/  "
         sudo sleep 5                    
@@ -192,7 +192,7 @@ ENDSSH
             mv /home/centos/alpha/backup2/index2.js /home/centos/alpha/deploy2/
             sudo rm -rf /home/centos/alpha/backup2/*            
             sudo rm -rf /home/centos/alpha/deploy3/*
-            mv /home/centos/alpha/backup2/index3.js /home/centos/alpha/deploy2/
+            mv /home/centos/alpha/backup3/index3.js /home/centos/alpha/deploy2/
             sudo rm -rf /home/centos/alpha/backup3/*            
             exit 1;
 ENDSSH 
@@ -212,7 +212,7 @@ ENDSSH
             mv /home/centos/alpha/backup2/index2.js /home/centos/alpha/deploy2/
             sudo rm -rf /home/centos/alpha/backup2/*            
             sudo rm -rf /home/centos/alpha/deploy3/*
-            mv /home/centos/alpha/backup2/index3.js /home/centos/alpha/deploy2/
+            mv /home/centos/alpha/backup3/index3.js /home/centos/alpha/deploy2/
             sudo rm -rf /home/centos/alpha/backup3/*            
             exit;
 ENDSSH 
