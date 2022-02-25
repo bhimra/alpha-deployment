@@ -151,6 +151,7 @@ ENDSSH
       '''
         }
       }
+    }
     
     stage ('Stage - 3: Build & Deploy index3.js service') {
       steps {
@@ -200,8 +201,8 @@ ENDSSH
             echo -e 'removed index.js from deploy2...........................................'
 ENDSSH 
       '''
-        }
-      }
-    }
+         }
+       }
+     }
   }
 }
